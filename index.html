@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Birthday Surprise</title>
+    <!-- Elegant Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- External Libraries -->
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D Cake -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Music Player -->
+    <div class="music-btn" id="musicBtn" title="Play Music">🎵</div>
+    <audio id="bgMusic" loop autoplay>
+        <!-- A sweet, royalty-free acoustic track placeholder -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1 class="hero-title">Happy Birthday Bestie!</h1>
+        <p class="hero-subtitle">Get ready for a magical surprise...</p>
+        <a href="#gallery" class="btn">Open Your Surprise 🎁</a>
+        
+        <div id="balloons-container"></div>
+    </section>
+
+    <!-- 3D Gallery Section -->
+    <section id="gallery">
+        <h2 class="section-title">Precious Memories 💖</h2>
+        
+        <!-- Swiper -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="asset/img1.jpeg" alt="Memory 1">
+                    <div class="quote-card">"Tera chehra dekh ke alien bhi bhag jaye! 👽"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img3.png" alt="Memory 2">
+                    <div class="quote-card">"Bhai tu sudhrega nahi na? 😂"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img4.jpeg" alt="Memory 3">
+                    <div class="quote-card">"Jab tak samose mein aaloo rahega, tera mera dosti chalu rahega! 🥟"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img5.jpeg" alt="Memory 4">
+                    <div class="quote-card">"Bhagwan bachaaye teri is smile se! 🤦‍♂️"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img6.png" alt="Memory 5">
+                    <div class="quote-card">"Tu pagal hai, aur mujhe pagalpan pasand hai! 🤪"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img7.png" alt="Memory 6">
+                    <div class="quote-card">"Birthday tera, kharcha mera... wait, ulat bol diya! 🥳"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img8.png" alt="Memory 7">
+                    <div class="quote-card">"Dosti ke naam par kalank hai tu! 😜"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img9.png" alt="Memory 8">
+                    <div class="quote-card">"Kya item lag raha hai bhai! 😎"</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="asset/img10.png" alt="Memory 9">
+                    <div class="quote-card">"Smile toh aise de raha hai jaise lottery lagi ho! 🤑"</div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Dedicated Video Section -->
+    <section id="video-section">
+        <h2 class="section-title">Special Video Blockbuster 🎬</h2>
+        <p class="hero-subtitle">Don't kill me for this... 😂</p>
+        <div class="video-container">
+            <video controls>
+                <source src="asset/video1.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- Message Section -->
+    <section id="message">
+        <h2 class="section-title">A Special Note 💌</h2>
+        <div class="message-box">
+            <div class="typewriter-text" id="typewriter"></div>
+            <div class="signature">- With all my love</div>
+            <button class="btn" id="surpriseBtn">Blow the candles 🎂</button>
+        </div>
+    </section>
+
+    <!-- Surprise Modal with 3D Cake -->
+    <div class="modal" id="surpriseModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2>Make a wish!</h2>
+            
+            <!-- 3D Cake Render Target -->
+            <div id="cake-container"></div>
+
+            <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">May all your dreams come true this year!<br>(Drag the cake to rotate it!)</p>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" onload="this.onload=null;this.rel='stylesheet'"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/cake.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
