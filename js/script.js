@@ -149,6 +149,18 @@ const closeModal = document.getElementById('closeModal');
 surpriseBtn.addEventListener('click', () => {
     modal.classList.add('active');
     
+    const hbdSound = document.getElementById('hbdSound');
+    if (hbdSound) {
+        hbdSound.volume = 1.0;
+        hbdSound.play().catch(e => console.log("HBD Audio play failed"));
+        if (isPlaying && bgMusic) {
+            bgMusic.pause();
+            hbdSound.onended = () => {
+                if (isPlaying) bgMusic.play();
+            };
+        }
+    }
+
     // Initialize the 3D Cake if it hasn't been yet
     if(typeof initCake === 'function') {
         initCake();
@@ -182,6 +194,14 @@ surpriseBtn.addEventListener('click', () => {
 
 closeModal.addEventListener('click', () => {
     modal.classList.remove('active');
+    const hbdSound = document.getElementById('hbdSound');
+    if (hbdSound) {
+        hbdSound.pause();
+        hbdSound.currentTime = 0;
+        if (isPlaying && bgMusic && bgMusic.paused) {
+            bgMusic.play();
+        }
+    }
 });
 
 // Videos Play/Pause on hover

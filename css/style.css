@@ -19,6 +19,7 @@ body, html {
     background: radial-gradient(circle at top right, var(--bg-dark) 0%, var(--bg-darker) 100%);
     color: var(--text-color);
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* --- Twinkling Stars Background --- */
@@ -35,10 +36,11 @@ body, html {
     border-radius: 50%;
     animation: twinkle linear infinite;
     opacity: 0;
+    will-change: transform, opacity;
 }
 @keyframes twinkle {
     0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 0.8; transform: scale(1.2); box-shadow: 0 0 15px var(--gold); }
+    50% { opacity: 0.8; transform: scale(1.2); }
     100% { opacity: 0; transform: scale(0.5); }
 }
 
@@ -152,6 +154,7 @@ section {
     z-index: 1;
     opacity: 0.6;
     filter: blur(5px);
+    will-change: transform, opacity;
 }
 .balloon::before {
     display: none;
@@ -374,7 +377,9 @@ section {
 @media (max-width: 768px) {
     .hero-title { font-size: 3.5rem; }
     .section-title { font-size: 2.5rem; }
-    .message-box { padding: 40px 25px; }
+    .message-box { padding: 40px 25px; backdrop-filter: none; background: rgba(20, 20, 30, 0.95); }
     .typewriter-text { font-size: 1.2rem; }
-    .swiper-slide { width: 260px; height: 380px; }
+    .swiper-slide { width: 260px; height: 380px; backdrop-filter: none; background: rgba(30, 30, 35, 0.95); }
+    .music-btn { backdrop-filter: none; background: rgba(212, 175, 55, 0.2); }
+    .modal { backdrop-filter: none; background: rgba(0,0,0,0.95); }
 }
